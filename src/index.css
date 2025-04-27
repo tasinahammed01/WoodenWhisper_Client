@@ -1,0 +1,111 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+* {
+  font-family: "Playfair Display", serif;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+/* Heading */
+.Heading {
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 43px;
+  color: rgb(178, 141, 87);
+}
+
+/* Subheading */
+.subheading {
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 58px;
+}
+
+/* Text */
+.text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: black;
+}
+
+/* Transition */
+.slide-in {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  transform-origin: bottom;
+}
+.slide-out {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  transform-origin: top;
+}
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+  .Hero_Heading {
+    font-size: 72px;
+    line-height: 68px;
+  }
+
+  .Heading {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .subheading {
+    font-size: 40px;
+    line-height: 50px;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .button {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+/* Mobile (up to 767px) */
+@media (max-width: 767px) {
+  .Hero_Heading {
+    font-size: 48px;
+    line-height: 52px;
+  }
+
+  .Heading {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .subheading {
+    font-size: 32px;
+    line-height: 42px;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .button {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
