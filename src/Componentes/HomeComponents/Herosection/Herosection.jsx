@@ -12,7 +12,7 @@ const HeroSection = () => {
         poster="https://i.ibb.co.com/Kp1bJq7F/handcrafted-wooden-decorative-sculptures.jpg" // Add poster here
       >
         <source
-          src="https://dfdemo.sumonpro.com/wp-content/uploads/2025/04/202504280149.mp4"
+          src="video.mp4"
           type="video/mp4"
         />
         Your browser does not support the video tag.

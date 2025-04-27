@@ -1,111 +1,69 @@
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import React, { useRef } from "react";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const VideosCompo = () => {
-  const textRefs = [useRef(null), useRef(null), useRef(null)];
+const VideoCompo = () => {
+  const containerRef = useRef();
 
   useGSAP(() => {
-    textRefs.forEach((ref) => {
-      gsap.fromTo(
-        ref.current,
-        { y: 100, opacity: 0 },
-        {
-          y: -100,
-          opacity: 1,
-          scrollTrigger: {
-            trigger: ref.current,
-            start: "top 90%",
-            end: "bottom 50%",
-            scrub: true,
-          },
-        }
-      );
+    let sections = gsap.utils.toArray(".panel");
+
+    // Make horizontal scroll work only after scroll-container hits the top
+    gsap.to(containerRef.current, {
+      opacity: 1, // When it reaches the top, fade it in
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top", // When the scroll-container hits the top of the screen
+        toggleActions: "play none none reverse", // Fade in when hits top
+      },
     });
-  }, [textRefs]);
+
+    gsap.to(sections, {
+      xPercent: -100 * (sections.length - 1),
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        pin: true,
+        scrub: 2,
+        snap: 1 / (sections.length - 1),
+        end: () => "+=" + containerRef.current.offsetWidth,
+      },
+    });
+  }, []);
 
   return (
-    <div className="relative">
-      {/* First video with text overlay */}
-      <div className="h-[100vh] sticky top-0 z-10">
+    <div>
+      <div className="scroll-container" ref={containerRef}>
+        <section className="panel bg-amber-200">
+          <video
+            autoPlay
+            muted
+            loop
+            src="https://dfdemo.sumonpro.com/wp-content/uploads/2025/04/6035511_Man_People_3840x2160.mp4"
+          ></video>
+        </section>
+        <section className="panel bg-violet-400">
         <video
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source src="video.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <div className="absolute inset-0 bg-black opacity-60"></div>
-        <h1
-          ref={textRefs[0]}
-          className="absolute text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl md:text-4xl lg:text-6xl font-bold"
-        >
-          OPEN VIEWS
-        </h1>
-      </div>
-
-      {/* Other videos */} 
-      <div className="h-[100vh]  sticky top-0 z-10">
+            autoPlay
+            muted
+            loop
+            src="https://dfdemo.sumonpro.com/wp-content/uploads/2025/04/0_Breakfast-In-Bed_Tray_3840x2160.mp4"
+          ></video>
+        </section>
+        <section className="panel bg-lime-300">
         <video
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source src="video1.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <div className="absolute inset-0 bg-black opacity-60"></div>
-        <h1
-          ref={textRefs[1]}
-          className="absolute text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl md:text-4xl lg:text-6xl font-bold"
-        >
-          COMPONENTS OF THE PRIMARY BEDROOM
-        </h1>
-      </div>
-
-      <div className="h-[100vh] sticky top-0 z-10">
-        <video
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source src="video2.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <div className="absolute inset-0 bg-black opacity-60"></div>
-        <h1
-          ref={textRefs[2]}
-          className="absolute text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl md:text-4xl lg:text-6xl font-bold"
-        >
-          RUG ELEGANCE
-        </h1>
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-          <div className="w-[80%] md:w-[50%] lg:w-[30%] mx-auto">
-            <button className="unique-btn1 w-full">
-              <span className="text-white title-transition.active">
-                SEE ALL VIDEOS
-              </span>
-              <span className="arrow">
-                <svg viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </span>
-            </button>
-          </div>
-        </div>
+            autoPlay
+            muted
+            loop
+            src="https://dfdemo.sumonpro.com/wp-content/uploads/2025/04/4935204_House_Furniture_3840x2160.mp4"
+          ></video>
+        </section>
       </div>
     </div>
   );
 };
 
-export default VideosCompo;
+export default VideoCompo;
