@@ -16,10 +16,13 @@ const HomeAbout = () => {
         </div>
         <div data-aos="fade-up" data-aos-delay="300">
           <h1 className="Heading">
-            Materials <span className="text-black">tell my story of </span>
+            Materials{" "}
+            <span className="text-[rgb(100,96,96)]">tell my story of </span>
             warmth and authenticity{" "}
-            <span className="text-black">creating the ultimate</span> sense of
-            home <span className="text-black">.</span>
+            <span className="text-[rgb(100,96,96)]">
+              creating the ultimate
+            </span>{" "}
+            sense of home <span className="text-[rgb(100,96,96)]">.</span>
           </h1>
         </div>
       </div>
@@ -32,7 +35,6 @@ const HomeAbout = () => {
       </div>
 
       <div data-aos="fade-up" data-aos-delay="700">
-import Button from "../../Button/Button";
         <Button title={"Philosophy"} />
       </div>
     </div>

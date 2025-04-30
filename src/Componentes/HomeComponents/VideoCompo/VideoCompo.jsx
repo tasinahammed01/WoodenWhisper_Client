@@ -1,67 +1,55 @@
-import React, { useRef } from "react";
+import React, { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import "./VideoCompo.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const VideoCompo = () => {
-  const containerRef = useRef();
-
-  useGSAP(() => {
-    let sections = gsap.utils.toArray(".panel");
-
-    // Make horizontal scroll work only after scroll-container hits the top
-    gsap.to(containerRef.current, {
-      opacity: 1, // When it reaches the top, fade it in
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top", // When the scroll-container hits the top of the screen
-        toggleActions: "play none none reverse", // Fade in when hits top
-      },
-    });
-
-    gsap.to(sections, {
-      xPercent: -100 * (sections.length - 1),
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        pin: true,
-        scrub: 2,
-        snap: 1 / (sections.length - 1),
-        end: () => "+=" + containerRef.current.offsetWidth,
-      },
+  useEffect(() => {
+    const panels = gsap.utils.toArray(".panel");
+    panels.forEach((panel, index) => {
+      if (index !== panels.length - 1) {
+        // Skip the last panel from pinning
+        ScrollTrigger.create({
+          trigger: panel,
+          start: "top top",
+          end: "bottom top",
+          pin: true,
+          pinSpacing: false,
+        });
+      }
     });
   }, []);
 
   return (
-    <div>
-      <div className="scroll-container" ref={containerRef}>
-        <section className="panel bg-amber-200">
-          <video
-            autoPlay
-            muted
-            loop
-            src="https://dfdemo.sumonpro.com/wp-content/uploads/2025/04/6035511_Man_People_3840x2160.mp4"
-          ></video>
-        </section>
-        <section className="panel bg-violet-400">
-        <video
-            autoPlay
-            muted
-            loop
-            src="https://dfdemo.sumonpro.com/wp-content/uploads/2025/04/0_Breakfast-In-Bed_Tray_3840x2160.mp4"
-          ></video>
-        </section>
-        <section className="panel bg-lime-300">
-        <video
-            autoPlay
-            muted
-            loop
-            src="https://dfdemo.sumonpro.com/wp-content/uploads/2025/04/4935204_House_Furniture_3840x2160.mp4"
-          ></video>
-        </section>
-      </div>
+    <div className="sections">
+      <section
+        className="panel"
+        style={{
+          backgroundImage: "url(https://i.ibb.co/z0tD9NZ/Tsai-34.jpg)",
+        }}
+      >
+        <h1>First Panel</h1>
+      </section>
+
+      <section
+        className="panel"
+        style={{
+          backgroundImage: "url(https://i.ibb.co.com/HfgfVFbw/Tsai-07.jpg)",
+        }}
+      >
+        <h1>Second Panel</h1>
+      </section>
+
+      <section
+        className="panel"
+        style={{
+          backgroundImage: "url(https://i.ibb.co.com/zWhrzpP7/Tsai-13.jpg)",
+        }}
+      >
+        <h1>Third Panel</h1>
+      </section>
     </div>
   );
 };
