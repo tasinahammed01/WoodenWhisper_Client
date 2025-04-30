@@ -42,7 +42,7 @@ const Collections = () => {
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          Designed by <br /> Anne-Marie Barton
+          Designed by <br /> Anne—Marie Barton
         </h1>
         <h1
           className="subheading text-black"
