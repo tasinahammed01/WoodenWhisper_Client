@@ -86,7 +86,7 @@ const Header = ({ handleLinkClick }) => {
             backgroundColor: `rgba(255, 255, 255, ${isOpen ? 0.98 : 0})`,
           }}
         >
-          <ul className="flex flex-col md:flex-row w-full text-center gap-6 nav_Links">
+          <ul className="flex flex-col md:flex-row w-full text-center gap-11 nav_Links">
             <li>
               <Link
                 to="/projects"
