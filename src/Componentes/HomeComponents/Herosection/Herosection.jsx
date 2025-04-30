@@ -20,7 +20,7 @@ const HeroSection = () => {
 
       {/* Text */}
       <div className="absolute bottom-10 left-10">
-        <h1 className="text-6xl md:text-8xl lg:text-8xl w-2">
+        <h1 className="text-6xl md:text-8xl lg:text-8xl w-[40%]">
           ANNE—MERIE BARTON
         </h1>
       </div>
