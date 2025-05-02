@@ -35,7 +35,7 @@ const Collections = () => {
   }, []);
 
   return (
-    <div className="py-10 px-5 lg:px-[10%] min-h-[50vh] lg:min-h-[100vh] flex flex-col lg:flex-row gap-10 justify-center items-center bg-[#EDE7DE]">
+    <div className="py-10 px-5 lg:px-[10%] min-h-screen-[50vh] lg:min-h-screen-[100vh] flex flex-col lg:flex-row gap-10 justify-center items-center bg-[#EDE7DE]">
       <div className="w-full lg:w-[50%] space-y-6 px-4 text-center lg:text-left">
         <h1
           className="subheading text-[#6E6C68]"
@@ -81,13 +81,14 @@ const Collections = () => {
         <img
           src="https://i.ibb.co/cKMN6Vc5/pexels-sara-kazemi-2148049458-30150599.jpg"
           alt=""
-          className="w-full md:w-[80%] h-[60vh] object-cover"
+          className="w-full h-[40vh] md:w-[80%] md:h-[60vh] object-cover rounded-md"
           ref={(el) => (imageRefs.current[0] = el)}
         />
+
         <img
           src="https://i.ibb.co/vNzwKBc/pexels-khadijah-17483167.jpg"
           alt=""
-          className="absolute bottom-[-30px] right-0 md:bottom-[-50px] md:right-4 w-[50%] md:w-[50%] h-[50%] md:h-[30%] lg:w-[40%] lg:h-[50%] rounded-full object-cover border-4 border-white shadow-lg"
+          className="absolute bottom-[-20px] right-0 sm:bottom-[-30px] sm:right-4 w-[70%] sm:w-[50%] h-[30vh] sm:h-[25vh] md:w-[40%] md:h-[40%] lg:w-[40%] lg:h-[50%] rounded-full object-cover border-4 border-white shadow-lg"
           ref={(el) => (imageRefs.current[1] = el)}
         />
       </div>

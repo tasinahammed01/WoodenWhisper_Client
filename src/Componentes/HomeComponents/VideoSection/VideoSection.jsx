@@ -14,7 +14,7 @@ const VideoSection = () => {
         Videos
       </p>
       <h1
-        className="videoSectionTitle lg:w-[40%] md:w-[80%] w-[100%] mx-auto text-3xl md:text-8xl lg:text-8xl text-[rgb(100,96,96)]"
+        className="videoSectionTitle  md:w-[80%] w-[100%] mx-auto text-3xl md:text-8xl lg:text-8xl text-[rgb(100,96,96)]"
         data-aos="fade-up"
         data-aos-duration="1500"
       >
