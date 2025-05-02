@@ -31,7 +31,7 @@ const VideoCompo = () => {
           backgroundImage: "url(https://i.ibb.co/z0tD9NZ/Tsai-34.jpg)",
         }}
       >
-        <h1>OPEN VIEWS</h1>
+        <h1 className="Hero_Heading">OPEN VIEWS</h1>
       </section>
 
       <section
@@ -40,7 +40,7 @@ const VideoCompo = () => {
           backgroundImage: "url(https://i.ibb.co.com/HfgfVFbw/Tsai-07.jpg)",
         }}
       >
-        <h1>COMPONENTS OF THE PRIMARY BEDROOM</h1>
+        <h1 className="Hero_Heading">COMPONENTS OF THE PRIMARY BEDROOM</h1>
       </section>
 
       <section
@@ -49,7 +49,7 @@ const VideoCompo = () => {
           backgroundImage: "url(https://i.ibb.co.com/zWhrzpP7/Tsai-13.jpg)",
         }}
       >
-        <h1>RUG ELEGANCE</h1>
+        <h1 className="Hero_Heading">RUG ELEGANCE</h1>
       </section>
     </div>
   );
