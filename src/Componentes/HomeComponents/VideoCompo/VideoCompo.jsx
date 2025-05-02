@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./VideoCompo.css";
+import Button from "../../SharedComponents/Button/Button";
 
 gsap.registerPlugin(ScrollTrigger);
 

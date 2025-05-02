@@ -4,9 +4,7 @@ import "aos/dist/aos.css";
 import Button from "../../SharedComponents/Button/Button";
 
 const HomeAbout = () => {
-  useEffect(() => {
-    Aos.init({ duration: 1000, once: true }); // smoother and only animates once
-  }, []);
+  
 
   return (
     <div className="lg:h-[60vh] md:h-[35vh] h-[90vh] space-y-10 lg:pl-[30%] lg:pr-[10%] px-10 flex flex-col justify-center bg-[#EDE7DE]">
