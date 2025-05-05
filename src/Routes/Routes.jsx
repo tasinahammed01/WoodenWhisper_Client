@@ -6,7 +6,7 @@ import Journal from "../Pages/Journal/Journal";
 import Projects from "../Pages/Projects/Projects";
 import Shop from "../Pages/Shop/Shop";
 import Videos from "../Pages/Videos/Videos";
-
+import SingleJournals from "../Pages/SingleJournals/SingleJournals";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +24,10 @@ export const router = createBrowserRouter([
       {
         path: "journal",
         element: <Journal />,
+      },
+      {
+        path: "journal/:id", 
+        element: <SingleJournals />,
       },
       {
         path: "projects",

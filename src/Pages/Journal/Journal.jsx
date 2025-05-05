@@ -6,7 +6,7 @@ const Journal = () => {
   const [journals, setJournals] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/journals")
+    fetch("https://woodenwhisper-backend-1.onrender.com/journals")
       .then((response) => response.json())
       .then((data) => setJournals(data))
       .catch((error) => console.error("Error fetching journals:", error));
@@ -27,8 +27,8 @@ const Journal = () => {
           {journals?.map((journal) => (
             <Link
               key={journal._id}
-              to={`/journals/${journal._id}`} // Dynamic Link to Journal Page
-              className="block" // Makes the entire section clickable
+              to={`/journal/${journal._id}`}
+              className="block"
             >
               <div className="p-4 my-6 rounded-lg flex flex-col md:flex-row gap-6 md:gap-20 ">
                 {/* Image Section */}
