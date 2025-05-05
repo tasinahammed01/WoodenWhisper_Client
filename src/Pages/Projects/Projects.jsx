@@ -156,7 +156,7 @@ const Projects = () => {
             ))}
           </div>
         ) : (
-          <ul className="flex flex-col gap-8 mt-10 relative z-10">
+          <ul className="flex flex-col gap-8 mt-30 relative z-10">
             {filteredImages.map((image) => (
               <Link to={`/image/${image._id}`}>
                 <li
