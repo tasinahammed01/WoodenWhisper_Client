@@ -4,6 +4,7 @@ import PageTransition from "../PageTransition/PageTransition";
 import Footer from "../Componentes/SharedComponents/Footer/Footer";
 import Header from "../Componentes/SharedComponents/Header/Header";
 import Lenis from "@studio-freight/lenis";
+import AnotherHeader from "../Componentes/SharedComponents/AnotherHeader/AnotherHeader";
 
 const Layout = () => {
   const [showTransition, setShowTransition] = useState(false);
@@ -35,11 +36,19 @@ const Layout = () => {
     };
   }, []);
 
+  const path = location.pathname;
+  const showMainHeader =
+    path === "/" || path === "/videos" || path === "/about";
+
   return (
     <PageTransition key={location.pathname}>
-      <Header handleLinkClick={handleLinkClick}></Header>
-      <Outlet></Outlet>
-      <Footer></Footer>
+      {showMainHeader ? (
+        <Header handleLinkClick={handleLinkClick} />
+      ) : (
+        <AnotherHeader handleLinkClick={handleLinkClick} />
+      )}
+      <Outlet />
+      <Footer />
     </PageTransition>
   );
 };
