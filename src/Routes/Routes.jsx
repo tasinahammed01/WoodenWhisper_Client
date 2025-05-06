@@ -7,6 +7,7 @@ import Projects from "../Pages/Projects/Projects";
 import Shop from "../Pages/Shop/Shop";
 import Videos from "../Pages/Videos/Videos";
 import SingleJournals from "../Pages/SingleJournals/SingleJournals";
+import SingleProjectPage from "../Pages/SingleProjectPage/SingleProjectPage";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: "projects",
         element: <Projects />,
+      },
+      {
+        path: "projects/:id",
+        element: <SingleProjectPage></SingleProjectPage>,
       },
       {
         path: "shop",

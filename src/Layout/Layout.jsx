@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router";
+import { matchPath, Outlet } from "react-router";
 import PageTransition from "../PageTransition/PageTransition";
 import Footer from "../Componentes/SharedComponents/Footer/Footer";
 import Header from "../Componentes/SharedComponents/Header/Header";
@@ -38,7 +38,10 @@ const Layout = () => {
 
   const path = location.pathname;
   const showMainHeader =
-    path === "/" || path === "/videos" || path === "/about";
+    path === "/" ||
+    path === "/videos" ||
+    path === "/about" ||
+    matchPath("/projects/:id", path);
 
   return (
     <PageTransition key={location.pathname}>

@@ -1,0 +1,43 @@
+.horizontal-scroll-wrapper {
+  margin: 0;
+  overflow-x: hidden;
+  padding: 0;
+}
+
+.horizontal-scroll-container {
+  display: flex;
+  height: 100vh;
+  gap: 20px;
+}
+
+.horizontal-scroll-section {
+  flex-shrink: 0;
+  width: 30vw;
+  height: 100vh;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .horizontal-scroll-section {
+      width: 50vw;
+      height: 90vh;
+    }
+  
+    .horizontal-scroll-container {
+      height: 90vh;
+      gap: 16px;
+    }
+  }
+  
+  /* Mobile */
+  @media (max-width: 768px) {
+    .horizontal-scroll-section {
+      width: 100vw;
+      height: 100vh;
+    }
+  
+    .horizontal-scroll-container {
+      height: 70vh;
+      gap: 12px;
+    }
+  }

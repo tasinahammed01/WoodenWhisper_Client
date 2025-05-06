@@ -143,7 +143,7 @@ const Projects = () => {
                   index % 3 === 2 ? "col-span-2" : ""
                 }`}
               >
-                <Link to={`/image/${image._id}`}>
+                <Link to={`/projects/${image._id}`}>
                   <img
                     loading="lazy"
                     src={image.image}
@@ -158,7 +158,7 @@ const Projects = () => {
         ) : (
           <ul className="flex flex-col gap-8 mt-30 relative z-10">
             {filteredImages.map((image) => (
-              <Link to={`/image/${image._id}`}>
+              <Link to={`/projects/${image._id}`}>
                 <li
                   key={image._id}
                   onMouseEnter={() => handleMouseEnter(image)}
