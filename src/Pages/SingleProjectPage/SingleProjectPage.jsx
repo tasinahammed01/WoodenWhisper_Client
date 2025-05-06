@@ -77,11 +77,11 @@ const SingleProjectPage = () => {
         </div>
       </div>
 
-      <div className="flex justify-between py-24 px-10 bg-[#EDE7DE]">
-        <h1 className="text-[rgb(100,96,96)] text-5xl w-[50%]">
+      <div className="md:flex justify-between py-24 px-10 bg-[#EDE7DE] space-y-10">
+        <h1 className="text-[rgb(100,96,96)] text-5xl md:w-[50%]">
           From the Ground Up
         </h1>
-        <p className="text-[rgb(100,96,96)] w-[50%] text">
+        <p className="text-[rgb(100,96,96)] md:w-[50%] text">
           Set quietly into the woods, this home feels etched into the earth,
           shaped by materials that belong to the land. The architecture leans
           into a modern softness. Rounded volumes and ribbed wood details guide
