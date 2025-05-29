@@ -1,13 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../Layout/Layout";
 import HomePage from "../Pages/HomePage/HomePage";
-import AboutPage from "../Pages/AboutPage/AboutPage";
+import AboutPage from "../Pages/AboutPage/Philosophy";
 import Journal from "../Pages/Journal/Journal";
 import Projects from "../Pages/Projects/Projects";
-import Shop from "../Pages/Shop/Shop";
 import Videos from "../Pages/Videos/Videos";
 import SingleJournals from "../Pages/SingleJournals/SingleJournals";
 import SingleProjectPage from "../Pages/SingleProjectPage/SingleProjectPage";
+import Lighting from "../Pages/Lighting/Lighting";
+import Rugs from "../Pages/Rugs/Rugs";
+import Philosophy from "../Pages/AboutPage/Philosophy";
 
 export const router = createBrowserRouter([
   {
@@ -18,8 +20,13 @@ export const router = createBrowserRouter([
         index: true, // equivalent to path: "/"
         element: <HomePage />,
       },
+
       {
-        path: "about",
+        path: "about/philosophy",
+        element: <Philosophy></Philosophy>,
+      },
+      {
+        path: "about/people",
         element: <AboutPage />,
       },
       {
@@ -27,7 +34,7 @@ export const router = createBrowserRouter([
         element: <Journal />,
       },
       {
-        path: "journal/:id", 
+        path: "journal/:id",
         element: <SingleJournals />,
       },
       {
@@ -39,8 +46,12 @@ export const router = createBrowserRouter([
         element: <SingleProjectPage></SingleProjectPage>,
       },
       {
-        path: "shop",
-        element: <Shop />,
+        path: "shop/lighting",
+        element: <Lighting></Lighting>,
+      },
+      {
+        path: "shop/rugs",
+        element: <Rugs></Rugs>,
       },
       {
         path: "videos",

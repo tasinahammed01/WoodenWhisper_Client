@@ -1,6 +1,6 @@
 import React from "react";
 
-const AboutPage = () => {
+const Philosophy = () => {
   return (
     <div className="bg-[#EDE7DE]">
       <div className="min-h-screen lg:flex pt-[100px] px-5 flex-col lg:flex-row">
@@ -138,4 +138,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;
+export default Philosophy;

@@ -101,20 +101,55 @@ const AnotherHeader = ({ handleLinkClick }) => {
                 Projects
               </Link>
             </li>
-            <li>
-              <Link
-                to="/shop"
-                className={`nav-link hover-underline block py-4 transition-colors duration-300 ${
-                  isScrolled ? "text-black" : "md:text-black"
-                } ${isOpen ? "text-black" : ""}`}
-                onClick={() => {
-                  handleLinkClick(); // Trigger transition when clicked
-                  setIsOpen(false);
-                }}
-              >
-                Shop
-              </Link>
+            <li className="relative group">
+              {isOpen ? (
+                <Link
+                  to="/shop/lighting"
+                  className={`nav-link hover-underline block py-4 transition-colors duration-300 text-black`}
+                  onClick={() => {
+                    handleLinkClick();
+                    setIsOpen(false);
+                  }}
+                >
+                  Shop
+                </Link>
+              ) : (
+                <span
+                  className={`nav-link hover-underline block py-4 cursor-default transition-colors duration-300 ${
+                    isScrolled ? "text-black" : "md:text-black"
+                  } ${isOpen ? "text-black" : ""}`}
+                >
+                  Shop
+                </span>
+              )}
+
+              {!isOpen && (
+                <div className="absolute top-full left-0 mt-1 w-40 bg-white shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-300 z-50">
+                  <Link
+                    to="/shop/lighting"
+                    className="block px-4 py-2 hover:bg-gray-100 text-black"
+                    onClick={() => {
+                      handleLinkClick();
+                      setIsOpen(false);
+                    }}
+                  >
+                    Lighting
+                  </Link>
+                  <hr className="border-gray-200" />
+                  <Link
+                    to="/shop/rugs"
+                    className="block px-4 py-2 hover:bg-gray-100 text-black"
+                    onClick={() => {
+                      handleLinkClick();
+                      setIsOpen(false);
+                    }}
+                  >
+                    Rugs
+                  </Link>
+                </div>
+              )}
             </li>
+
             <li>
               <Link
                 to="/videos"
@@ -129,20 +164,55 @@ const AnotherHeader = ({ handleLinkClick }) => {
                 Videos
               </Link>
             </li>
-            <li>
-              <Link
-                to="/about"
-                className={`nav-link hover-underline block py-4 transition-colors duration-300 ${
-                  isScrolled ? "text-black" : "md:text-black"
-                } ${isOpen ? "text-black" : ""}`}
-                onClick={() => {
-                  handleLinkClick(); // Trigger transition when clicked
-                  setIsOpen(false);
-                }}
-              >
-                About
-              </Link>
+            <li className="relative group">
+              {isOpen ? (
+                <Link
+                  to="/about/philosophy"
+                  className={`nav-link hover-underline block py-4 transition-colors duration-300 text-black`}
+                  onClick={() => {
+                    handleLinkClick();
+                    setIsOpen(false);
+                  }}
+                >
+                  About
+                </Link>
+              ) : (
+                <span
+                  className={`nav-link hover-underline block py-4 cursor-default transition-colors duration-300 ${
+                    isScrolled ? "text-black" : "md:text-black"
+                  } ${isOpen ? "text-black" : ""}`}
+                >
+                  About
+                </span>
+              )}
+
+              {!isOpen && (
+                <div className="absolute top-full left-0 mt-1 w-40 bg-white shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-300 z-50">
+                  <Link
+                    to="/about/philosophy"
+                    className="block px-4 py-2 hover:bg-gray-100 text-black"
+                    onClick={() => {
+                      handleLinkClick();
+                      setIsOpen(false);
+                    }}
+                  >
+                    Philosophy
+                  </Link>
+                  <hr className="border-gray-200" />
+                  <Link
+                    to="/about/people"
+                    className="block px-4 py-2 hover:bg-gray-100 text-black"
+                    onClick={() => {
+                      handleLinkClick();
+                      setIsOpen(false);
+                    }}
+                  >
+                    People
+                  </Link>
+                </div>
+              )}
             </li>
+
             <li>
               <Link
                 to="/journal"
