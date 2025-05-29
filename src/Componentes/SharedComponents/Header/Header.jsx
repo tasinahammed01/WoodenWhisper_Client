@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import "./Header.css";
 import { Link } from "react-router-dom";
+import "./Header.css";
 
 const Header = ({ handleLinkClick }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,17 +16,22 @@ const Header = ({ handleLinkClick }) => {
     const handleScroll = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
+      // Calculate opacity from 0 to 1 based on scroll threshold
       const newOpacity = Math.min(scrollTop / scrollThreshold, 1);
       setBgOpacity(newOpacity);
 
       if (scrollTop > scrollThreshold) {
         setIsScrolled(true);
+
         if (scrollTop > lastScrollTop && scrollTop > headerHeight) {
+          // Scrolling down and passed header height - hide header
           setIsHeaderVisible(false);
         } else if (scrollTop < lastScrollTop) {
+          // Scrolling up - show header
           setIsHeaderVisible(true);
         }
       } else {
+        // Near top of page, reset states
         setIsScrolled(false);
         setIsHeaderVisible(true);
       }
@@ -35,12 +40,13 @@ const Header = ({ handleLinkClick }) => {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out ${
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-500 ease-in-out ${
         !isHeaderVisible ? "-translate-y-full" : "translate-y-0"
       }`}
       style={{
@@ -56,7 +62,13 @@ const Header = ({ handleLinkClick }) => {
       <div className="py-4 px-6 flex justify-between items-center">
         {/* Logo */}
         <div className="logo transition-opacity duration-300 hover:opacity-80">
-          <Link to="/" onClick={() => handleLinkClick()}>
+          <Link
+            to="/"
+            onClick={() => {
+              handleLinkClick();
+              setIsOpen(false); // Close menu on logo click
+            }}
+          >
             <img
               src="https://i.ibb.co/B5zSn3LC/Screenshot-410-removebg-preview.png"
               alt="Logo"
@@ -69,6 +81,8 @@ const Header = ({ handleLinkClick }) => {
         <button
           className="md:hidden focus:outline-none z-50 relative"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle navigation menu"
+          aria-expanded={isOpen}
         >
           <div
             className={`hamburger ${isOpen ? "open" : ""} ${
@@ -94,46 +108,58 @@ const Header = ({ handleLinkClick }) => {
                   isScrolled ? "text-black" : "md:text-white"
                 } ${isOpen ? "text-black" : ""}`}
                 onClick={() => {
-                  handleLinkClick(); // Trigger transition when clicked
+                  handleLinkClick();
                   setIsOpen(false);
                 }}
               >
                 Projects
               </Link>
             </li>
-            <li className="relative group cursor-pointer">
-              <span
-                className={`nav-link hover-underline block py-4 transition-colors duration-300 ${
-                  isScrolled ? "text-black" : "md:text-white"
-                } ${isOpen ? "text-black" : ""}`}
-              >
-                Shop
-              </span>
 
-              {/* Dropdown Menu */}
-              <div className="absolute top-full left-0 mt-1 w-40 bg-white shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-300 z-50">
+            <li className="relative group">
+              {isOpen ? (
                 <Link
                   to="/shop/lighting"
-                  className="block px-4 py-2 hover:bg-gray-100 text-black"
+                  className="nav-link hover-underline block py-4 transition-colors duration-300 text-black"
                   onClick={() => {
                     handleLinkClick();
                     setIsOpen(false);
                   }}
                 >
-                  Lighting
+                  Shop
                 </Link>
-                <hr className="border-gray-200" />
-                <Link
-                  to="/shop/rugs"
-                  className="block px-4 py-2 hover:bg-gray-100 text-black"
-                  onClick={() => {
-                    handleLinkClick();
-                    setIsOpen(false);
-                  }}
-                >
-                  Rugs
-                </Link>
-              </div>
+              ) : (
+                // Make Shop text always white here
+                <span className="nav-link hover-underline block py-4 cursor-default transition-colors duration-300 text-white">
+                  Shop
+                </span>
+              )}
+
+              {!isOpen && (
+                <div className="absolute top-full left-0 mt-1 w-40 bg-white shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-300 z-50">
+                  <Link
+                    to="/shop/lighting"
+                    className="block px-4 py-2 hover:bg-gray-100 text-black"
+                    onClick={() => {
+                      handleLinkClick();
+                      setIsOpen(false);
+                    }}
+                  >
+                    Lighting
+                  </Link>
+                  <hr className="border-gray-200" />
+                  <Link
+                    to="/shop/rugs"
+                    className="block px-4 py-2 hover:bg-gray-100 text-black"
+                    onClick={() => {
+                      handleLinkClick();
+                      setIsOpen(false);
+                    }}
+                  >
+                    Rugs
+                  </Link>
+                </div>
+              )}
             </li>
 
             <li>
@@ -143,47 +169,60 @@ const Header = ({ handleLinkClick }) => {
                   isScrolled ? "text-black" : "md:text-white"
                 } ${isOpen ? "text-black" : ""}`}
                 onClick={() => {
-                  handleLinkClick(); // Trigger transition when clicked
+                  handleLinkClick();
                   setIsOpen(false);
                 }}
               >
                 Videos
               </Link>
             </li>
-            <li className="relative group cursor-pointer">
-              <span
-                className={`nav-link hover-underline block py-4 transition-colors duration-300 ${
-                  isScrolled ? "text-black" : "md:text-white"
-                } ${isOpen ? "text-black" : ""}`}
-              >
-                About
-              </span>
 
-              {/* Dropdown Menu */}
-              <div className="absolute top-full left-0 mt-1 w-40 bg-white shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-300 z-50">
+            <li className="relative group">
+              {isOpen ? (
                 <Link
-                  to="/about/philosophy"
-                  className="block px-4 py-2 hover:bg-gray-100 text-black"
+                  to="/about/photo"
+                  className="nav-link hover-underline block py-4 transition-colors duration-300 text-black"
                   onClick={() => {
                     handleLinkClick();
                     setIsOpen(false);
                   }}
                 >
-                  Philosophy
+                  About
                 </Link>
-                <hr className="border-gray-200" />
-                <Link
-                  to="/about/people"
-                  className="block px-4 py-2 hover:bg-gray-100 text-black"
-                  onClick={() => {
-                    handleLinkClick();
-                    setIsOpen(false);
-                  }}
-                >
-                  People
-                </Link>
-              </div>
+              ) : (
+                // Make About text always white here
+                <span className="nav-link hover-underline block py-4 cursor-default transition-colors duration-300 text-white">
+                  About
+                </span>
+              )}
+
+              {!isOpen && (
+                <div className="absolute top-full left-0 mt-1 w-40 bg-white shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-300 z-50">
+                  <Link
+                    to="/about/philosophy"
+                    className="block px-4 py-2 hover:bg-gray-100 text-black"
+                    onClick={() => {
+                      handleLinkClick();
+                      setIsOpen(false);
+                    }}
+                  >
+                    Philosophy
+                  </Link>
+                  <hr className="border-gray-200" />
+                  <Link
+                    to="/about/people"
+                    className="block px-4 py-2 hover:bg-gray-100 text-black"
+                    onClick={() => {
+                      handleLinkClick();
+                      setIsOpen(false);
+                    }}
+                  >
+                    People
+                  </Link>
+                </div>
+              )}
             </li>
+
             <li>
               <Link
                 to="/journal"
@@ -191,7 +230,7 @@ const Header = ({ handleLinkClick }) => {
                   isScrolled ? "text-black" : "md:text-white"
                 } ${isOpen ? "text-black" : ""}`}
                 onClick={() => {
-                  handleLinkClick(); // Trigger transition when clicked
+                  handleLinkClick();
                   setIsOpen(false);
                 }}
               >
