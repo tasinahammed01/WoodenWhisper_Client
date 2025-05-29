@@ -1,11 +1,11 @@
 import React from "react";
 
-const Philosophy = () => {
+const People = () => {
   return (
     <div className="bg-[#EDE7DE]">
       <div className="min-h-screen lg:flex pt-[150px] px-5 flex-col lg:flex-row">
         <div className="lg:w-[50%] lg:pr-8 w-full">
-          <p className="text-black text-xl leading-relaxed">Philosophy</p>
+          <p className="text-black text-xl leading-relaxed">People</p>
           <h2 className="text-[40px] md:text-[50px] lg:text-[60px] text-black leading-tight font-medium">
             Where Design, Craftsmanship, and Vision Meet
           </h2>
@@ -138,4 +138,4 @@ const Philosophy = () => {
   );
 };
 
-export default Philosophy;
+export default People;

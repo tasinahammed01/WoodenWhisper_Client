@@ -10,6 +10,7 @@ import SingleProjectPage from "../Pages/SingleProjectPage/SingleProjectPage";
 import Lighting from "../Pages/Lighting/Lighting";
 import Rugs from "../Pages/Rugs/Rugs";
 import Philosophy from "../Pages/AboutPage/Philosophy";
+import People from "../Pages/AboutPage/People";
 
 export const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "about/people",
-        element: <AboutPage />,
+        element: <People></People>,
       },
       {
         path: "journal",
