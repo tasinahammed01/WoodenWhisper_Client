@@ -1,85 +1,62 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
-import gsap from "gsap";
+import React, { useEffect, useState, useCallback } from "react";
+import ProjectsGallery from "./ProjectsGallery";
+
+const categories = ["All", "Mountain", "Desert", "City", "Garden", "Seaside"];
 
 const Projects = () => {
   const [images, setImages] = useState([]);
-  const [activeView, setActiveView] = useState("grid");
-  const [selectedCategory, setSelectedCategory] = useState("All");
   const [filteredImages, setFilteredImages] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [activeView, setActiveView] = useState("grid");
   const [isFading, setIsFading] = useState(false);
-  const [hoveredImage, setHoveredImage] = useState(null);
 
-  const imageRef = useRef(null);
-
-  const categories = ["All", "Mountain", "Desert", "City", "Garden", "Seaside"];
-
+  // Fetch images
   useEffect(() => {
-    fetch("https://woodenwhisper-backend-1.onrender.com/images")
+    const controller = new AbortController();
+    fetch("https://woodenwhisper-backend-1.onrender.com/images", {
+      signal: controller.signal,
+    })
       .then((res) => res.json())
       .then((data) => {
         setImages(data);
         setFilteredImages(data);
       })
-      .catch((err) => console.error("Error fetching images:", err));
+      .catch((err) => {
+        if (err.name !== "AbortError")
+          console.error("Error fetching images:", err);
+      });
+
+    return () => controller.abort();
   }, []);
 
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-    setIsFading(true);
+  // Filter by category
+  const handleCategoryChange = useCallback(
+    (category) => {
+      setSelectedCategory(category);
+      setIsFading(true);
+      requestAnimationFrame(() => {
+        const filtered =
+          category === "All"
+            ? images
+            : images.filter(
+                (img) => img.category?.toLowerCase() === category.toLowerCase()
+              );
+        setFilteredImages(filtered);
+        setIsFading(false);
+      });
+    },
+    [images]
+  );
 
-    setTimeout(() => {
-      const filtered =
-        category === "All"
-          ? images
-          : images.filter(
-              (img) => img.category?.toLowerCase() === category.toLowerCase()
-            );
-      setFilteredImages(filtered);
-      setIsFading(false);
-    }, 200);
-  };
-
-  // Set grid view for smaller screens
+  // Set grid view for small screens
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 1200) {
-        setActiveView("grid");
-      }
+      if (window.innerWidth < 1200) setActiveView("grid");
     };
-
-    handleResize(); // initial check
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  // GSAP animation on image hover
-  const handleMouseEnter = (image) => {
-    if (hoveredImage?._id === image._id) return; // Prevent re-triggering same image
-
-    setHoveredImage(image);
-
-    gsap.fromTo(
-      imageRef.current,
-      { autoAlpha: 0, scale: 0.9, y: 0 },
-      {
-        autoAlpha: 1,
-        scale: 1,
-        y: -30,
-        duration: 1.5,
-        ease: "power2.out",
-      }
-    );
-  };
-
-  const handleMouseLeave = () => {
-    gsap.to(imageRef.current, {
-      autoAlpha: 0,
-      scale: 0.95,
-      duration: 0.3,
-      ease: "power2.inOut",
-    });
-  };
 
   return (
     <div className="pt-40 px-7 bg-[#EDE7DE] text-[rgb(100,96,96)] relative">
@@ -108,7 +85,7 @@ const Projects = () => {
           </div>
         </div>
 
-        <div className="lg:flex gap-5 mt-20 hidden ">
+        <div className="lg:flex gap-5 mt-20 hidden">
           <p
             className={`uppercase cursor-pointer ${
               activeView === "grid" ? "text-black" : "text-gray-400"
@@ -128,61 +105,12 @@ const Projects = () => {
         </div>
       </div>
 
-      {/* Grid or List View */}
-      <div
-        className={`mt-10 transition-opacity duration-500 ${
-          isFading ? "opacity-0" : "opacity-100"
-        }`}
-      >
-        {activeView === "grid" ? (
-          <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-            {filteredImages.map((image, index) => (
-              <div
-                key={image._id}
-                className={`w-full overflow-hidden ${
-                  index % 3 === 2 ? "col-span-2" : ""
-                }`}
-              >
-                <Link to={`/projects/${image._id}`}>
-                  <img
-                    loading="lazy"
-                    src={image.image}
-                    alt={image.title || "Gallery Image"}
-                    className="w-full lg:h-[700px] md:h-[500px] h-[300px] object-cover rounded-md shadow-md hover:scale-105 transform transition duration-300 ease-in-out"
-                    style={{ filter: "brightness(0.8)" }}
-                  />
-                </Link>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <ul className="flex flex-col gap-8 mt-30 relative z-10">
-            {filteredImages.map((image) => (
-              <Link to={`/projects/${image._id}`}>
-                <li
-                  key={image._id}
-                  onMouseEnter={() => handleMouseEnter(image)}
-                  onMouseLeave={handleMouseLeave}
-                  className="text-6xl mt-10 font-semibold cursor-pointer hover:text-black transition-colors duration-300"
-                >
-                  {image.title || "Untitled"}
-                </li>
-              </Link>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      {/* Floating Hover Image */}
-      {hoveredImage && (
-        <img
-          loading="lazy"
-          ref={imageRef}
-          src={hoveredImage.image}
-          alt="Preview"
-          className="pointer-events-none fixed top-1/2 left-1/2 z-0 opacity-0 scale-90 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] object-cover rounded-xl shadow-xl"
-        />
-      )}
+      {/* Gallery Component */}
+      <ProjectsGallery
+        images={filteredImages}
+        view={activeView}
+        isFading={isFading}
+      />
     </div>
   );
 };

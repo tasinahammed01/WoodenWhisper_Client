@@ -38,10 +38,7 @@ const Layout = () => {
 
   const path = location.pathname;
   const showMainHeader =
-    path === "/" ||
-    path === "/videos" ||
-    path === "/about" ||
-    matchPath("/projects/:id", path);
+    path === "/" || path === "/videos" || matchPath("/projects/:id", path);
 
   return (
     <PageTransition key={location.pathname}>
