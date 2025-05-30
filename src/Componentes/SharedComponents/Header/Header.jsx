@@ -130,7 +130,11 @@ const Header = ({ handleLinkClick }) => {
                 </Link>
               ) : (
                 // Make Shop text always white here
-                <span className="nav-link hover-underline block py-4 cursor-default transition-colors duration-300 text-white">
+                <span
+                  className={`nav-link hover-underline block py-4 cursor-default transition-colors duration-300 ${
+                    isScrolled ? "text-black" : "md:text-white"
+                  }`}
+                >
                   Shop
                 </span>
               )}
@@ -191,7 +195,11 @@ const Header = ({ handleLinkClick }) => {
                 </Link>
               ) : (
                 // Make About text always white here
-                <span className="nav-link hover-underline block py-4 cursor-default transition-colors duration-300 text-white">
+                <span
+                  className={`nav-link hover-underline block py-4 cursor-default transition-colors duration-300 ${
+                    isScrolled ? "text-black" : "md:text-white"
+                  }`}
+                >
                   About
                 </span>
               )}

@@ -42,13 +42,22 @@ const Layout = () => {
 
   return (
     <PageTransition key={location.pathname}>
-      {showMainHeader ? (
-        <Header handleLinkClick={handleLinkClick} />
-      ) : (
-        <AnotherHeader handleLinkClick={handleLinkClick} />
-      )}
-      <Outlet />
-      <Footer />
+      <div className="min-h-screen flex flex-col">
+        {/* Header */}
+        {showMainHeader ? (
+          <Header handleLinkClick={handleLinkClick} />
+        ) : (
+          <AnotherHeader handleLinkClick={handleLinkClick} />
+        )}
+
+        {/* Page content that grows */}
+        <div className="flex-grow">
+          <Outlet />
+        </div>
+
+        {/* Footer pushed to bottom */}
+        <Footer />
+      </div>
     </PageTransition>
   );
 };

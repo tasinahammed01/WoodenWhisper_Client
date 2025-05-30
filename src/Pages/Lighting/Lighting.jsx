@@ -1,11 +1,11 @@
 import React from 'react';
 
 const Lighting = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return (
+    <div>
+      page
+    </div>
+  );
 };
 
 export default Lighting;
