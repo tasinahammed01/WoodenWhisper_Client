@@ -1,12 +1,72 @@
-# React + Vite
+## Wooden Whisper — Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, animated, and fully responsive React application showcasing interior design collections, projects, journals, and videos.
 
-Currently, two official plugins are available:
+### Highlights
+- GSAP-powered scroll and reveal animations across pages
+- Framer Motion page transitions
+- Responsive layout with Tailwind CSS
+- React Router for nested routing
+- Optimized image loading and hover previews in Projects
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Tech Stack
+- React 19
+- Vite 6
+- Tailwind CSS 4 (+ `@tailwindcss/vite`)
+- GSAP 3 (`gsap`, `@gsap/react`, `ScrollTrigger`)
+- Framer Motion 12
+- React Router 7
+- DaisyUI
+- Lenis (smooth scrolling)
+- Optional: AOS (available in deps)
 
-## Expanding the ESLint configuration
+### Notable Features by Page
+- Home: hero video, carousel, collections, and smooth GSAP reveals
+- About (Philosophy, People): ScrollTrigger-based section reveals and staggers
+- Projects: category filters, grid/list views, hover-follow image preview, responsive images
+- Videos: full-screen, pinned scroller with “curtain” and horizontal variants
+- Shop (Lighting, Rugs): horizontally pinned card sections with snap
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Getting Started
+1) Install dependencies
+   - `npm install`
+2) Start the dev server
+   - `npm run dev`
+3) Build for production
+   - `npm run build`
+4) Preview production build
+   - `npm run preview`
+
+### Scripts
+- `dev`: start Vite dev server
+- `build`: build production assets
+- `preview`: preview built assets
+- `lint`: run ESLint
+
+### Project Structure (client)
+- `src/`
+  - `Pages/`: route pages (Home, About, Projects, Journal, Videos, Shop)
+  - `Componentes/`: home and shared UI components
+  - `Routes/Routes.jsx`: app router
+  - `Layout/`: shared layout shell
+  - `PageTransition/`: framer-motion transition wrapper
+
+### Animations
+- GSAP + ScrollTrigger for scroll-based reveals, pinned sections, and horizontal scrollers
+- `@gsap/react` for lifecycle-safe timelines
+- Framer Motion for route-level transitions
+
+### Image Performance
+- Responsive `srcset`/`sizes` with on-the-fly compression (via image proxy) for Projects grid
+- Lightweight, optimized hover preview in list view
+
+### Backend
+The repository includes a minimal backend skeleton under `wooden-wishper-backend/`. The client currently fetches:
+- Images: `https://woodenwhisper-backend.onrender.com/images`
+- Journals: `https://woodenwhisper-backend.onrender.com/journals`
+
+### Requirements
+- Node.js 18+
+
+### License
+For portfolio/demo use. Replace assets and endpoints as needed for production.
