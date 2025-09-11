@@ -3,7 +3,7 @@
 A modern, animated, and fully responsive React application showcasing interior design collections, projects, journals, and videos.
 
 ---
-🌐 **Website Live Link:** [WoodenWhisper]([https://woodenwhisper.netlify.app/)
+🌐 **Website Live Link:** [WoodenWhisper](https://woodenwhisper.netlify.app/)
 
 
 ### Highlights
