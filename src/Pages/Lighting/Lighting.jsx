@@ -16,8 +16,6 @@ const Lighting = () => {
         opacity: 1,
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top top",
-          end: "top+=600px",
           toggleActions: "play none none reverse",
           // markers: true,
         },
@@ -28,13 +26,11 @@ const Lighting = () => {
         ease: "none",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top top",
-          end: () => `+=${containerRef.current.scrollWidth}`,
           pin: true,
           scrub: 1,
           snap: 1 / (sections.length - 1),
           anticipatePin: 1,
-          markers: true,
+          // markers: true,
         },
       });
     }
@@ -58,6 +54,24 @@ const Lighting = () => {
       title: "Furniture",
       description:
         "Artisanal, textural, and livable. Designs that evoke balance and luxury, enhancing the experience of both form and function.",
+    },
+    {
+      src: "https://i.ibb.co/Tx1hCS5V/Philosophy-Page02-1.jpg",
+      title: "Hardware",
+      description:
+        "Hand-cast forms with enduring finishes that patinate gracefully while elevating daily touchpoints.",
+    },
+    {
+      src: "https://i.ibb.co/Kpw0DQ5F/Philosophy-Page03-poster.jpg",
+      title: "Faucetry",
+      description:
+        "Sculptural silhouettes in solid brass and stone—where water becomes a designed experience.",
+    },
+    {
+      src: "https://i.ibb.co/JWnwW2Q9/Philosophy-Page04-poster.jpg",
+      title: "Objects",
+      description:
+        "Collected accents and vessels that add quiet character and a sense of story to any space.",
     },
   ];
 

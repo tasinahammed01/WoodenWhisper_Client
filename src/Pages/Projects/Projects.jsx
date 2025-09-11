@@ -50,8 +50,17 @@ const Projects = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setImages(data);
-        setFilteredImages(data);
+        const cleaned = (Array.isArray(data) ? data : [])
+          .filter(Boolean)
+          .filter((img) => img && img._id && img.image)
+          .map((img) => ({
+            _id: img._id,
+            image: img.image,
+            title: img.title || "Untitled",
+            category: img.category || "All",
+          }));
+        setImages(cleaned);
+        setFilteredImages(cleaned);
       })
       .catch((err) => {
         if (err.name !== "AbortError")
