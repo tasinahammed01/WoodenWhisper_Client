@@ -1,9 +1,95 @@
-import React from "react";
+import React, { useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Philosophy = () => {
+  const rootRef = useRef(null);
+
+  useGSAP(
+    () => {
+      const ctx = gsap.context(() => {
+        // Intro section
+        gsap.from(".philo-intro > *", {
+          y: 40,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".philo-intro",
+            start: "top 80%",
+          },
+        });
+
+        // First image reveal
+        gsap.from(".philo-hero-img", {
+          scale: 1.05,
+          opacity: 0,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".philo-hero-img",
+            start: "top 85%",
+          },
+        });
+
+        // Big statement blocks
+        gsap.utils.toArray([".philo-statement-1", ".philo-statement-2"]).forEach(
+          (sel) => {
+            gsap.from(sel, {
+              y: 30,
+              opacity: 0,
+              duration: 0.8,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: sel,
+                start: "top 80%",
+              },
+            });
+          }
+        );
+
+        // Full-width image parallax fade
+        gsap.from(".philo-wide-img", {
+          opacity: 0,
+          y: 40,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".philo-wide-img",
+            start: "top 85%",
+          },
+        });
+
+        // Videos and concluding CTA
+        gsap.utils
+          .toArray([".philo-video-1", ".philo-video-2", ".philo-cta"]) 
+          .forEach((sel, i) => {
+            gsap.from(sel, {
+              y: 30,
+              opacity: 0,
+              duration: 0.8,
+              delay: i * 0.1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: sel,
+                start: "top 85%",
+              },
+            });
+          });
+      }, rootRef);
+
+      return () => ctx.revert();
+    },
+    { scope: rootRef }
+  );
+
   return (
-    <div className="bg-[#EDE7DE]">
-      <div className="min-h-screen lg:flex pt-[150px] px-5 flex-col lg:flex-row">
+    <div ref={rootRef} className="bg-[#EDE7DE]">
+      <div className="min-h-screen lg:flex pt-[150px] px-5 flex-col lg:flex-row philo-intro">
         <div className="lg:w-[50%] lg:pr-8 w-full">
           <p className="text-black text-xl leading-relaxed">Philosophy</p>
           <h2 className="text-[40px] md:text-[50px] lg:text-[60px] text-black leading-tight font-medium">
@@ -17,14 +103,14 @@ const Philosophy = () => {
         </div>
         <div className="lg:w-[50%] w-full lg:mt-0 mt-10">
           <img
-            className="w-full lg:h-[90vh] h-auto object-cover"
+            className="philo-hero-img w-full lg:h[90vh] h-auto object-cover"
             src="https://i.ibb.co/yng7MSJF/Philosophy-Page01.jpg"
             alt="Philosophy"
           />
         </div>
       </div>
 
-      <div className="lg:min-h-[80vh] min-h-[50vh] flex flex-col justify-center text-black px-5 space-y-6 mt-20 lg:mt-0">
+      <div className="philo-statement-1 lg:min-h-[80vh] min-h-[50vh] flex flex-col justify-center text-black px-5 space-y-6 mt-20 lg:mt-0">
         <h1 className="text-[30px] md:text-[40px] lg:text-[60px] leading-tight font-medium">
           I crave uniquely tangible qualities in everything I create, where
           materials, shapes, textures, and patinas come together to evoke
@@ -43,13 +129,13 @@ const Philosophy = () => {
 
       <div className="w-full mt-10">
         <img
-          className="w-full object-cover"
+          className="philo-wide-img w-full object-cover"
           src="https://i.ibb.co/Tx1hCS5V/Philosophy-Page02-1.jpg"
           alt=""
         />
       </div>
 
-      <div className="lg:min-h-[80vh] min-h-[50vh]  flex flex-col justify-center text-black px-5 space-y-6 mt-10">
+      <div className="philo-statement-2 lg:min-h-[80vh] min-h-[50vh]  flex flex-col justify-center text-black px-5 space-y-6 mt-10">
         <h1 className="text-[30px] md:text-[40px] lg:text-[60px] leading-tight font-medium">
           Design is never an isolated act; it emerges from a moving dialogue
           amongst builders, clients, and architects as we aim to achieve the
@@ -70,7 +156,7 @@ const Philosophy = () => {
         </p>
       </div>
 
-      <div className="flex justify-center py-16 px-5">
+      <div className="flex justify-center py-16 px-5 philo-video-1">
         <div className="w-full">
           <video
             className="w-full rounded-lg shadow-lg"
@@ -83,7 +169,7 @@ const Philosophy = () => {
         </div>
       </div>
 
-      <div className="min-h-[60vh] flex flex-col justify-center items-center text-black px-5 space-y-6">
+      <div className="min-h-[60vh] flex flex-col justify-center items-center text-black px-5 space-y-6 philo-cta">
         <h1 className="text-[30px] md:text-[40px] lg:text-[60px] leading-tight font-medium text-center w-full md:w-[80%] lg:w-[50%]">
           The home is a vessel where we collect experiences and share them with
           those who are a part of our lives.
@@ -103,7 +189,7 @@ const Philosophy = () => {
       </div>
 
       <div className="flex flex-col lg:flex-row">
-        <div className="flex justify-center py-16 px-5 w-full lg:w-[50%]">
+        <div className="flex justify-center py-16 px-5 w-full lg:w-[50%] philo-video-2">
           <div className="w-full">
             <video
               className="w-full rounded-lg shadow-lg"
@@ -121,7 +207,7 @@ const Philosophy = () => {
             </p>
           </div>
         </div>
-        <div className="flex justify-center py-16 px-5 w-full lg:w-[50%]">
+        <div className="flex justify-center py-16 px-5 w-full lg:w-[50%] philo-video-2">
           <div className="w-full">
             <video
               className="w-full rounded-lg shadow-lg"

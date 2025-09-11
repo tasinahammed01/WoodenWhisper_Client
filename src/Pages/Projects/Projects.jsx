@@ -1,5 +1,10 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import ProjectsGallery from "./ProjectsGallery";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const categories = ["All", "Mountain", "Desert", "City", "Garden", "Seaside"];
 
@@ -9,11 +14,38 @@ const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [activeView, setActiveView] = useState("grid");
   const [isFading, setIsFading] = useState(false);
+  const rootRef = useRef(null);
+
+  useGSAP(
+    () => {
+      const ctx = gsap.context(() => {
+        gsap.from(".projects-title", {
+          y: 30,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: { trigger: ".projects-title", start: "top 85%" },
+        });
+
+        gsap.from(".projects-filters > *", {
+          y: 15,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: "power2.out",
+          scrollTrigger: { trigger: ".projects-filters", start: "top 85%" },
+        });
+      }, rootRef);
+
+      return () => ctx.revert();
+    },
+    { scope: rootRef }
+  );
 
   // Fetch images
   useEffect(() => {
     const controller = new AbortController();
-    fetch("https://woodenwhisper-backend-1.onrender.com/images", {
+    fetch("https://woodenwhisper-backend.onrender.com/images", {
       signal: controller.signal,
     })
       .then((res) => res.json())
@@ -59,13 +91,13 @@ const Projects = () => {
   }, []);
 
   return (
-    <div className="pt-40 px-7 bg-[#EDE7DE] text-[rgb(100,96,96)] relative">
-      <h1 className="lg:text-8xl md:text-6xl text-3xl uppercase">
+    <div ref={rootRef} className="pt-40 px-7 bg-[#EDE7DE] text-[rgb(100,96,96)] relative">
+      <h1 className="projects-title lg:text-8xl md:text-6xl text-3xl uppercase">
         Project Gallery
       </h1>
 
       {/* Filters */}
-      <div className="flex justify-between items-center flex-wrap gap-5">
+      <div className="flex justify-between items-center flex-wrap gap-5 projects-filters">
         <div className="flex items-center gap-10 mt-20 flex-wrap">
           <div className="text-black font-semibold">Filter By:</div>
           <div className="flex items-center gap-5 flex-wrap">

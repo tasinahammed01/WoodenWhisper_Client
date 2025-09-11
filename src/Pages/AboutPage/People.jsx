@@ -1,4 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const teamMembers = [
   {
@@ -34,16 +39,78 @@ const teamMembers = [
 ];
 
 const People = () => {
+  const rootRef = useRef(null);
+
+  useGSAP(
+    () => {
+      const ctx = gsap.context(() => {
+        // Intro hero left text
+        gsap.from(".people-hero > *", {
+          y: 30,
+          opacity: 0,
+          duration: 0.7,
+          ease: "power2.out",
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: ".people-hero",
+            start: "top 80%",
+          },
+        });
+
+        // Right column image and text block
+        gsap.from(".people-hero-media", {
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".people-hero-media",
+            start: "top 85%",
+          },
+        });
+
+        // Team grid items stagger
+        gsap.from(".people-team-item", {
+          y: 20,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".people-team-grid",
+            start: "top 85%",
+          },
+        });
+
+        // CTA and quote over video
+        gsap.from([".people-quote", ".people-cta"], {
+          y: 30,
+          opacity: 0,
+          duration: 0.7,
+          ease: "power2.out",
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: ".people-video-section",
+            start: "top 75%",
+          },
+        });
+      }, rootRef);
+
+      return () => ctx.revert();
+    },
+    { scope: rootRef }
+  );
+
   return (
-    <div className="bg-[#EDE7DE] px-5">
+    <div ref={rootRef} className="bg-[#EDE7DE] px-5">
       <div className="min-h-screen lg:flex pt-[150px] px-5 flex-col lg:flex-row flex-wrap">
-        <div className="lg:w-[50%] lg:pr-8 w-full">
+        <div className="people-hero lg:w-[50%] lg:pr-8 w-full">
           <p className="text-black text-xl leading-relaxed">People</p>
           <h2 className="text-[30px] md:text-[50px] lg:text-[96px] uppercase text-black leading-tight font-medium">
             The AMB <br /> Studio
           </h2>
         </div>
-        <div className="lg:w-[50%] w-full lg:mt-0 mt-10 space-y-5">
+        <div className="people-hero-media lg:w-[50%] w-full lg:mt-0 mt-10 space-y-5">
           <img
             className="w-full lg:h-[70vh] h-auto object-cover object-top"
             src="https://i.ibb.co/xSPwFCJK/People-Page01.jpg"
@@ -69,9 +136,9 @@ const People = () => {
         <h1 className="uppercase text-black text-[50px] sm:text-[65px] md:text-[80px] text-center md:text-left">
           Team
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 mt-6 md:mt-10">
+        <div className="people-team-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 mt-6 md:mt-10">
           {teamMembers.map((member, index) => (
-            <div key={index} className="text-left">
+            <div key={index} className="people-team-item text-left">
               <img
                 src={member.imageUrl}
                 alt={member.name}
@@ -102,12 +169,12 @@ const People = () => {
 
         {/* Text Section */}
         <div className="w-full md:w-1/2 text-black flex flex-col items-center justify-between px-4 sm:px-6 md:px-12 py-6 md:py-0">
-          <div className="mb-8 md:mb-0 text-center md:text-left">
+          <div className="people-quote mb-8 md:mb-0 text-center md:text-left">
             <h1 className="text-3xl sm:text-4xl md:text-[60px] leading-tight">
               Crafting <br /> Experiences
             </h1>
             <div className="mt-6 mx-auto md:mx-0 lg:w-4/5 md:w-[70%] sm:w-3/4 w-full">
-              <button className="unique-btn2 w-full">
+              <button className="people-cta unique-btn2 w-full">
                 <span className="text-black title-transition2 active">
                   LET’S WORK TOGETHER
                 </span>
@@ -142,7 +209,7 @@ const People = () => {
         </div>
       </div>
 
-      <div className="relative h-screen pb-10">
+      <div className="people-video-section relative h-screen pb-10">
         <div className="absolute bottom-0 left-0 w-full h-[95vh] object-cover">
           <video
             className="w-full h-full object-cover rounded-lg shadow-xl"

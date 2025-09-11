@@ -7,7 +7,7 @@ const SingleJournals = () => {
   const [journal, setJournal] = useState(null);
 
   useEffect(() => {
-    fetch(`https://woodenwhisper-backend-1.onrender.com/journals/${id}`)
+    fetch(`https://woodenwhisper-backend.onrender.com/journals/${id}`)
       .then((res) => res.json())
       .then((data) => setJournal(data))
       .catch((err) => console.error("Error fetching journal:", err));

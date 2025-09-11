@@ -15,7 +15,7 @@ const SingleProjectPage = () => {
 
   // Fetch single project
   useEffect(() => {
-    fetch(`https://woodenwhisper-backend-1.onrender.com/images/${id}`)
+    fetch(`https://woodenwhisper-backend.onrender.com/images/${id}`)
       .then((res) => res.json())
       .then((data) => setProject(data))
       .catch((err) => console.error("Error fetching journal:", err));
@@ -23,7 +23,7 @@ const SingleProjectPage = () => {
 
   // Fetch all images
   useEffect(() => {
-    fetch("https://woodenwhisper-backend-1.onrender.com/images")
+    fetch("https://woodenwhisper-backend.onrender.com/images")
       .then((res) => res.json())
       .then((data) => setImages(data))
       .catch((err) => console.error("Error fetching images:", err));
