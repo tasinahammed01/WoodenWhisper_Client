@@ -2,6 +2,10 @@
 
 A modern, animated, and fully responsive React application showcasing interior design collections, projects, journals, and videos.
 
+---
+🌐 **Website Live Link:** [WoodenWhisper]([https://woodenwhisper.netlify.app/)
+
+
 ### Highlights
 - GSAP-powered scroll and reveal animations across pages
 - Framer Motion page transitions
@@ -10,12 +14,10 @@ A modern, animated, and fully responsive React application showcasing interior d
 - Optimized image loading and hover previews in Projects
 
 ### Tech Stack
-- React 19
-- Vite 6
+- React js
 - Tailwind CSS 4 (+ `@tailwindcss/vite`)
 - GSAP 3 (`gsap`, `@gsap/react`, `ScrollTrigger`)
-- Framer Motion 12
-- React Router 7
+- Framer Motion
 - DaisyUI
 - Lenis (smooth scrolling)
 - Optional: AOS (available in deps)
